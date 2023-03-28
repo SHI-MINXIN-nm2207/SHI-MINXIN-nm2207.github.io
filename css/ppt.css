@@ -18,6 +18,23 @@
   border-radius: 3px;
 }
 
+
+.mask1 {
+  padding: 10px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  z-index: 11;
+  border-radius: 3px;
+}
+
+
+
+
 /* 为对话框添加背景颜色和阴影效果 */
 /* add background color and shadow effect to dialog element */
 .dialogTxt {

@@ -1,5 +1,15 @@
 //reference from https://gitee.com/qxscj/js-demo/blob/master/html+css/32.html
 
+document.getElementById('dialog').style.display = 'none'
+const buttonSure = document.getElementById('close')
+buttonSure.onclick = function () {
+  document.getElementById('mask1').style.display = 'none'
+  document.getElementById('dialog').style.display = 'block'
+}
+
+
+
+
 const sure = document.getElementById('sure');
 // get the button
 
