@@ -1,20 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>My NM2207 GitHub Portfolio</title>
-    <script defer src="scripts/counter.js"></script>
-    <script defer type="text/javascript" src="scripts/frist.js"></script>
-    <link rel="stylesheet" href="styles/styles.css" />
+<html>
+  <head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> snake game </title>
+    <!-- 引入css文件 -->
+    <!-- add css files -->
+    <link rel="stylesheet" href="./css/ppt.css">
+    <link rel="stylesheet" href="./css/snake.css">
   </head>
   <body>
-    <h1>Hello world! 🚀</h1>
-    <h2>This is a site hosted on GitHub Pages.</h2>
-    <h3>Here's a hungry mouse. Please feed him!</h3>
-    <h3 class="mouse">🐁</h3>
-    <h3>Food counter: <span class="counter">0</span> 🥙</h3>
-    <button>Feed!</button>
-
-    <button onclick="week5()">Click me</button>
-    <p id = 'he'> wow </p>
+    <!-- 弹出框，用于输入用户名称 -->
+    <!-- add dialog box for user name -->
+    <div id="dialog" class="dialog">
+      <!-- 弹出框标题 -->
+      <!-- dialog box title -->
+      <div class="title">Please enter your name</div>
+      <input type="text" class="dialogTxt" id="dialogTxt">
+      <!-- 弹出框按钮 -->
+      <!-- dialog box button -->
+      <div class="sure" id="sure"> Sure </div>
+    </div>
+    <!-- 背景音乐 -->
+    <!-- add background music -->
+    <audio preload loop src="./resources/Volumebgm.mp3" autoplay id="vd">
+      Your browser does not support the audio element.
+    </audio>
+    <!-- 游戏画布 -->
+    <!-- add canvas -->
+    <canvas id="pptCanvas" width="1000" height="600"></canvas>
+    <div id= "main" >
+      <!-- 添加两种不同的结束特效 -->
+      <!-- add two different end effects -->
+      <div class="fire"></div>
+      <div class="bomb"></div>
+      <!-- 游戏计时器 -->
+      <!-- add game timer -->
+      <div class="count-down"> Time: <span id = 'timecount'>100</span>s</div>
+      <!-- 游戏开始按钮 -->
+      <!-- add game start button -->
+      <div id = beginBox >
+          <div class="btn" id="begin">Begin </div>
+      </div>
+      <!-- 蛇的地图 -->
+      <!-- add snake map -->
+      <div class="map" id="map"></div>
+      <!-- 游戏说明 -->
+      <!-- add game instructions -->
+      <div class="desc">
+        Attention:
+        <span class="item fruits">Fruits</span>
+        <span class="item poison">Poison</span>
+        <span class="item drugs">Drugs</span>
+      </div>
+  </div>
+    <!-- 蛇游戏逻辑 -->
+    <!-- add snake game logic -->
+    <script src="./js/snake.js"></script>
+    <!-- 游戏开始界面逻辑 -->
+    <!-- add game start page logic -->
+    <script src="js/ppt.js"></script>
   </body>
 </html>

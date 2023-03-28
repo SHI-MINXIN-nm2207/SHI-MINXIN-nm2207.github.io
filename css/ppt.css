@@ -1,0 +1,58 @@
+/* 添加Google Fonts字体链接 */
+/* add Google Fonts link */
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
+
+/* 为canvas元素添加背景颜色和阴影效果 */
+/* add background color and shadow effect to canvas element */
+.dialog {
+  padding: 10px;
+  width: 280px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  z-index: 11;
+  border-radius: 3px;
+}
+
+/* 为对话框添加背景颜色和阴影效果 */
+/* add background color and shadow effect to dialog element */
+.dialogTxt {
+  margin: 10px 0;
+  padding: 5px;
+  width: 100%;
+  height: 32px;
+  border: solid 1px #000;
+  box-sizing: border-box;
+}
+
+/* 为确认按钮添加样式 */
+/* add style to confirm button */
+.sure {
+  width: 50px;
+  padding: 5px;
+  background-color: #4b7ede;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  float: right;
+}
+
+/* 画布的整体样式 */
+/* overall style of canvas */
+canvas {
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.3) inset;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  z-index: 10;
+  background-color: #000;
+}
