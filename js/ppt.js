@@ -1,13 +1,13 @@
 //reference from https://gitee.com/qxscj/js-demo/blob/master/html+css/32.html
 
+// show the document at frist
 document.getElementById('dialog').style.display = 'none'
 const buttonSure = document.getElementById('close')
+// after see the document, click the button to close the document
 buttonSure.onclick = function () {
   document.getElementById('mask1').style.display = 'none'
   document.getElementById('dialog').style.display = 'block'
 }
-
-
 
 
 const sure = document.getElementById('sure');
@@ -46,7 +46,7 @@ const bgData = Array.from(new Array(100)).map(v => {
 });
 
 // Function to send text and create granulated text effect
-const sendText = (text, fontSize = ((width * 1.1) / text.length), stepV = 40) => {
+const sendText = (text, fontSize = ((width * 1.2) / text.length), stepV = 40) => {
   ctx.font = `bold ${fontSize}px Montserrat`; // Set font style and size
   ctx.fillStyle = '#000000'; // Set fill particle to black
   ctx.fillRect(0, 0, width, height); // Fill the canvas with black particle
@@ -68,9 +68,9 @@ const sendText = (text, fontSize = ((width * 1.1) / text.length), stepV = 40) =>
     const x = index % width; // Calculate x position
     const y = Math.ceil(index / width); // Calculate y position
     if (x % bl === 0 && y % bl === 0 && data[i] === 255 && data[i + 1] === 255 && data[i + 2] === 255) {
-      const rx = Math.floor(Math.random() * fontSize) + width / 2 - fontSize / 2; 
+      const rx = Math.floor(Math.random() * fontSize) + width / 2 - fontSize / 2;
       // Calculate random x position within the text bounds
-      const ry = Math.floor(Math.random() * fontSize) + height / 2 - fontSize / 2; 
+      const ry = Math.floor(Math.random() * fontSize) + height / 2 - fontSize / 2;
       // Calculate random y position within the text bounds
       const item = particles[useIndex]; // Get the current particle item
       if (item) { // If the particle item exists
@@ -162,12 +162,12 @@ const run = async () => {
 
   const text = [
     'Hello, {name}!\nWelcome to this place.'.replace('{name}',
-     document.getElementById('dialogTxt').value), 
-     'Want to escape from the darkness?\nOnly enough food can make you really wake up.',
-     'You will lose the chance to wake up if you don\'t\nget food within a certain period of time.',
+      document.getElementById('dialogTxt').value),
+    'Want to escape from the darkness?\nOnly enough food can make you really wake up.',
+    'You will lose the chance to wake up if you don\'t\nget food within a certain period of time.',
     'But there is more than life-saving food in this\nworld,\nthere are also amazing poisonous things.',
-    'When you mistakenly eat the poisonous fruit,\nthe moment will be far from\nthe end of starvation.\nBut you are farther and farther away from\nactually waking up.',
-    'In the darkness there are fruits and poisons and\ndrugs that can make you wake up quickly.','Remember!\nRed is edible fruit\nBlue is the fruit of double energy\nGreen is poisonous']
+    'When you mistakenly eat the poisonous fruit,\nthe moment will be far from\nthe end of starvation.', 'But you are farther and farther away from\nactually waking up.',
+    'In the darkness there are fruits and poisons and\ndrugs that can make you wake up quickly.', 'Remember!\nRed is edible fruit\nBlue is the fruit of double energy\nGreen is poisonous']
   for (let i = 0; i < text.length; i++) {
     await awaitSendText(text[i], 40, 40)
   }

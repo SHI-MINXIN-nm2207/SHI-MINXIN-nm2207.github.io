@@ -8,38 +8,54 @@ body {
 /* 游戏主体容器 */
 /* game main container */
 #main {
-    display: none; /* 初始时隐藏 hide initially */
-    width: 1200px; /* 宽度  width */
-    height: 600px; /* 高度 height */
-    position: relative; /* 相对定位  relative positioning */
-    top: 50vh; /* 垂直居中 vertical center */
-    left: 50vw; /* 水平居中 horizontal center */
-    transform: translate(-50%, -50%); /* 位移  translation */
+    display: none;
+    /* 初始时隐藏 hide initially */
+    width: 1200px;
+    /* 宽度  width */
+    height: 600px;
+    /* 高度 height */
+    position: relative;
+    /* 相对定位  relative positioning */
+    top: 50vh;
+    /* 垂直居中 vertical center */
+    left: 50vw;
+    /* 水平居中 horizontal center */
+    transform: translate(-50%, -50%);
+    /* 位移  translation */
 }
 
 /* 倒计时容器 */
 /* count down container */
 .count-down {
-    position: absolute; /* 绝对定位 absolute positioning */
-    top: 20px; /* 上边距 top margin */
-    left: 20px; /* 左边距 left margin */
-    font-weight: bold; /* 文字加粗 bold text */
-    font-size: 24px; /* 文字大小 text size */
-    color: #fff; /* 文字颜色 text color */
-    z-index: 12; 
+    position: absolute;
+    /* 绝对定位 absolute positioning */
+    top: 20px;
+    /* 上边距 top margin */
+    left: 20px;
+    /* 左边距 left margin */
+    font-weight: bold;
+    /* 文字加粗 bold text */
+    font-size: 24px;
+    /* 文字大小 text size */
+    color: #fff;
+    /* 文字颜色 text color */
+    z-index: 12;
 }
 
 /* 物品描述 */
 /* item description */
 .desc {
-    position: relative; /* 相对定位 relative positioning */
-    bottom: -20px; /* 下边距 bottom margin */
+    position: relative;
+    /* 相对定位 relative positioning */
+    bottom: -20px;
+    /* 下边距 bottom margin */
 }
 
 /* 物品描述图标 */
 /* item description icon */
 .item {
-    margin-left: 20px; /* 左边距 */
+    margin-left: 20px;
+    /* 左边距 */
 }
 
 /* 水果 */
@@ -54,29 +70,37 @@ body {
 
 
 .fruits::before {
-    background-color: red; /* 颜色 */
+    background-color: red;
+    /* 颜色 */
 }
 
 /* 毒药 */
 /* poison */
 .poison::before {
-    background-color: green; /* 颜色 */
+    background-color: green;
+    /* 颜色 */
 }
 
 /* 药丸 */
 /* drugs */
 .drugs::before {
-    background-color: blue; /* 颜色 */
+    background-color: blue;
+    /* 颜色 */
 }
 
 /* 地图容器 */
 /* map container */
 .map {
-    position: relative; /* 相对定位 relative positioning */
-    width: 1200px; /* 宽度 width */
-    height: 600px; /* 高度 height */
-    background:url(../resources/bg.png) ; /* 背景颜色 background color */
-    margin: 0 auto; /* 水平居中 */
+    position: relative;
+    /* 相对定位 relative positioning */
+    width: 1200px;
+    /* 宽度 width */
+    height: 600px;
+    /* 高度 height */
+    background: url(../resources/bg.png);
+    /* 背景颜色 background color */
+    margin: 0 auto;
+    /* 水平居中 */
 }
 
 /* 开始游戏的盒子 */
@@ -113,9 +137,12 @@ body {
 /* 开始游戏的按钮 */
 /* start game button */
 #begin {
-    width: 200px; /* 宽度 */
-    height: 50px; /* 高度 */
-    background: #fff; /* 背景色 */
+    width: 200px;
+    /* 宽度 */
+    height: 50px;
+    /* 高度 */
+    background: #fff;
+    /* 背景色 */
     border: 1px solid;
 
     /* 相对父级盒子居中 */

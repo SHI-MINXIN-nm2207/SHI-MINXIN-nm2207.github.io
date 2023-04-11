@@ -277,7 +277,7 @@ function Snake() {
             // 根据蛇的长度，设置定时器频率SnakeTime
             SnakeTime = SnakeTime - (len - 3) * 5;
             // SnakeTime最低不能小于40
-            
+
             if (SnakeTime < 40) {
                 SnakeTime = 40;
             }
@@ -370,8 +370,8 @@ function Food() {
         if (this.x == wrongfood.x && this.y == wrongfood.y) {
             this.x = this.x + 1;
             this.y = this.y + 1;
-        // 如果食物位置和药物食物位置重合，则修改食物的横纵坐标
-        // if the position of the food is the same as the correct food, then change the position of the food
+            // 如果食物位置和药物食物位置重合，则修改食物的横纵坐标
+            // if the position of the food is the same as the correct food, then change the position of the food
         } else if (this.x == correctfood.x && this.y == correctfood.y) {
             this.x = this.x + 1;
             this.y = this.y + 1;
@@ -424,8 +424,8 @@ function wrongfood() {
         if (this.x == food.x && this.y == food.y) {
             this.x = this.x + 1;
             this.y = this.y + 1;
-        // 如果毒药的横纵坐标与药物的横纵坐标相同，则修改毒药的横纵坐标
-        // if the horizontal and vertical coordinates of the wrong food are the same as the horizontal and vertical coordinates of the drug, modify the horizontal and vertical coordinates of the wrong food
+            // 如果毒药的横纵坐标与药物的横纵坐标相同，则修改毒药的横纵坐标
+            // if the horizontal and vertical coordinates of the wrong food are the same as the horizontal and vertical coordinates of the drug, modify the horizontal and vertical coordinates of the wrong food
         } else if (this.x == correctfood.x && this.y == correctfood.y) {
             this.x = this.x + 2;
             this.y = this.y + 2;
@@ -472,11 +472,11 @@ function correctfood() {
         // 判断药物食物和错误食物，普通食物的位置是否重合，如果重合，则调整药物食物的位置
         // judge whether the position of the drug food and the wrong food, the normal food overlaps, if it overlaps, adjust the position of the drug food
         if (this.x == food.x && this.y == food.y) {
-        this.x = this.x + 1;
-        this.y = this.y + 1;
+            this.x = this.x + 1;
+            this.y = this.y + 1;
         } else if (this.x == wrongfood.x && this.y == wrongfood.y) {
-        this.x = this.x + 1;
-        this.y = this.y + 1;
+            this.x = this.x + 1;
+            this.y = this.y + 1;
         }
         // 设置药物食物的位置
         // set the position of the drug food
@@ -486,8 +486,8 @@ function correctfood() {
         // add the drug food to the map
         map.appendChild(f);
     }
-  }
-  
+}
+
 
 
 // 给body加按键事件，上下左右
@@ -585,7 +585,7 @@ btn.onclick = function () {
         snake.run();
     }, time2);
 
-    
+
 }
 
 
