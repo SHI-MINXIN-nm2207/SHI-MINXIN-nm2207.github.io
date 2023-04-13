@@ -34,4 +34,7 @@ function bodyScale2() {
 
 window.onload = window.onresize = function () {
     bodyScale1();
+    document.getElementById('vd').puase()
+    document.getElementById('snakebgm').puase()
+    document.getElementById('winbgm').puase()
 };
