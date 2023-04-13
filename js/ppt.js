@@ -9,7 +9,7 @@ const buttonSure = document.getElementById('close')
 buttonSure.onclick = function () {
   document.getElementById('mask1').style.display = 'none'
   document.getElementById('dialog').style.display = 'block'
-  
+
 }
 
 
@@ -18,11 +18,15 @@ const sure = document.getElementById('sure');
 
 // if this button is clicked, run the function
 sure.onclick = function () {
-  run()
-  document.getElementById('dialog').style.display = 'none'
-  // make the music play
-  document.getElementById('vd').play()
-
+  inputText = document.getElementById('dialogTxt').value;
+  if (inputText.trim() === "") {
+    alert("Please enter your name!");
+  } else {
+    run()
+    document.getElementById('dialog').style.display = 'none'
+    // make the music play
+    document.getElementById('vd').play()
+  }
 }
 
 // show the canvas at frist
@@ -157,7 +161,7 @@ const awaitSendText = async (txt, fontSize, stepV) => {
     sendText(txt, fontSize, stepV)
     particles.sort(v => Math.random() - 0.5)
     // setting the timeout to 5160ms
-    setTimeout(() => resolve(), 160 + (stepV > 40 ? 1000 : 0))
+    setTimeout(() => resolve(), 5160 + (stepV > 40 ? 1000 : 0))
   })
 }
 
@@ -168,7 +172,7 @@ const run = async () => {
       document.getElementById('dialogTxt').value),
     'Want to escape from the darkness?\nOnly enough food can make you really wake up.',
     'You will lose the chance to wake up if you don\'t\nget food within a certain period of time.',
-    'But there is more than life-saving food in this\nworld,\nthere are also amazing poisonous things.',
+    'But there is not only life-saving food in this\nworld,\nthere are also amazing poisonous things.',
     'When you mistakenly eat the poisonous fruit,\nthe moment will be far from\nthe end of starvation.', 'But you are farther and farther away from\nactually waking up.',
     'In the darkness there are fruits and poisons and\ndrugs that can make you wake up quickly.', 'Remember!\nRed is edible fruit\nYellow is the fruit of double energy\nGreen is poisonous']
   for (let i = 0; i < text.length; i++) {

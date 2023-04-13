@@ -3,16 +3,18 @@
 // Fixed constants
 
 // set the normal win number
-const windowNormal = 5;
+const winNormal = 5;
 const countDownTimeNormal = 101000;
-const SnakeTimeNormal = 200;
+
+const SnakeTimeMax = 200;
 const thisFalse = 2;
 const thisTrue = 1;
 const thisWin = 3;
 
 
 // the velocity of the snake
-var SnakeTime = SnakeTimeNormal;
+var SnakeTime = SnakeTimeMax;
+var SnakeTimeNormal = SnakeTimeMax;
 // map
 var map = document.getElementById('map');
 
@@ -24,52 +26,81 @@ timeoutflag = false;
 
 
 // set the normal win number
-var winnumber = windowNormal;
+var winnumber = winNormal;
 
 // set all image to be invisible
 document.getElementById('challenge').style.display = 'none';
 document.getElementById('text1').style.display = 'none';
 document.getElementById('normal').style.display = 'none';
+document.getElementById('winGifR').style.display = 'none';
+document.getElementById('winGifL').style.display = 'none';
 
 // make the harder game mode
 document.getElementById('challenge').onclick = function () {
     // add the Conditions of victory
     winnumber = winnumber + 5;
+    SnakeTimeNormal = SnakeTimeNormal - 10;
+    // level up
+    let levelNow = parseInt(document.getElementById('levelnow').innerHTML);
+    document.getElementById('levelnow').innerHTML = levelNow + 1;
+
     // make the limit of max win number to be 25
-    if (winnumber > 25) {
-        winnumber = 25;
+    if (winnumber > 30) {
+        winnumber = 30;
     }
     // make the time limit shorter
     countDownTime = countDownTime - 20000;
     // limit the time limit to be 25s
+    if (countDownTime <= 40000) {
+        // make the snake move faster
+        SnakeTimeNormal = SnakeTimeNormal / 2;
+        SnakeTimeNormal += 10;
+    }
     if (countDownTime <= 20000) {
         countDownTime = 20000;
-        // make the snake move faster
-        SnakeTime = SnakeTime - 10;
+    }
+    if (SnakeTimeNormal <= 60) {
+        winnumber = winnumber - 15;
+        if (winnumber <= 5) { winnumber = 10; }
     }
 
+    console.log('time' + SnakeTime);
     // if the snamke move too fast, make it win
-    if (SnakeTime < 40) {
+    if (SnakeTimeNormal <= 41) {
         // 彻底胜利
+        // finally win
         popMsg('Congratulations! You have broken through the layers of the puzzle! \n You have successfully escaped!', thisWin);
         // after win, make the button invisible
         document.getElementById('challenge').style.display = 'none';
         document.getElementById('text1').style.display = 'none';
         document.getElementById('normal').style.display = 'none';
         document.getElementById('beginBox').style.display = 'none';
+        var elements = document.getElementsByClassName('Need');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = 'none';
+        }
+
+        // change music
+        document.getElementById('snakebgm').pause();
+        document.getElementById('winbgm').play();
+        document.getElementById('winGifR').style.display = 'block';
+        document.getElementById('winGifL').style.display = 'block';
 
     }
     // after click the button, make the button invisible
     document.getElementById('challenge').style.display = 'none';
     document.getElementById('text1').style.display = 'none';
+
+
 }
 
 // make the normal game mode
 document.getElementById('normal').onclick = function () {
     // set the number as begin
-    winnumber = windowNormal;
+    document.getElementById('levelnow').innerHTML = 1;
+    winnumber = winNormal;
     countDownTime = countDownTimeNormal;
-    SnakeTime = SnakeTimeNormal;
+    SnakeTime = SnakeTimeMax;
     // after click the button, make the button invisible
     document.getElementById('normal').style.display = 'none';
 }
@@ -92,9 +123,26 @@ function updateTime() {
 
     // when time left is 0, the game will end
     if (remainingTime <= 0) {
-        popMsg('timeout! You died!')
-        flagBagin = false;
+        popMsg('Timeout! You died!')
+
         timeoutflag = true;
+        document.getElementById('beginBox').style.display = 'block';
+        if (winnumber != winNormal) {
+            document.getElementById('normal').style.display = 'block';
+        }
+        // 删除旧的蛇
+        // delete the old snake
+        for (var i = 0; i < this.body.length; i++) {
+            if (this.body[i].flag != null) {
+
+                map.removeChild(this.body[i].flag);
+            }
+        }
+        this.body = game.setbody();;
+        this.direction = 'down';
+        this.display();   // display the snake
+        flagBagin = false;
+
         return;
     }
     // update the time left to screen
@@ -105,6 +153,17 @@ function updateTime() {
 setInterval(updateTime, 1000);
 
 
+function setbody() {
+    return [
+        { x: 2, y: 1 },
+        { x: 1, y: 1 },
+        { x: 1, y: 0 }
+    ];
+}
+
+let game = {
+    setbody: setbody
+};
 
 // using constructor to create a snake
 function Snake() {
@@ -116,11 +175,7 @@ function Snake() {
 
     // record the status of the snake, when the snake eat the food, it will add a new point
     // the initial length of the snake is 3
-    this.body = [
-        { x: 2, y: 0 },   // head of the snake, the first point
-        { x: 1, y: 0 },   // mid of the snake, the second point
-        { x: 0, y: 0 }    // tail of the snake, the third point
-    ];
+    this.body = game.setbody();;
 
     // display the snake
     this.display = function () {
@@ -197,11 +252,7 @@ function Snake() {
                     map.removeChild(this.body[i].flag);
                 }
             }
-            this.body = [   // nack to the initial status
-                { x: 2, y: 0 },
-                { x: 1, y: 0 },
-                { x: 0, y: 0 }
-            ];
+            this.body = game.setbody();;
             this.direction = 'down';
             this.display();   // display the snake
             flagBagin = false;
@@ -220,7 +271,7 @@ function Snake() {
             // 显示重新开始按钮
             // display the button of restart
             document.getElementById('beginBox').style.display = 'block';
-            if (winnumber != windowNormal) {
+            if (winnumber != winNormal) {
                 document.getElementById('normal').style.display = 'block';
             }
             // 删除旧的蛇
@@ -231,11 +282,7 @@ function Snake() {
                     map.removeChild(this.body[i].flag);
                 }
             }
-            this.body = [   // back to the initial status
-                { x: 2, y: 0 },
-                { x: 1, y: 0 },
-                { x: 0, y: 0 }
-            ];
+            this.body = game.setbody();;
             this.direction = 'down';
             this.display();   // display the snake
             flagBagin = false;
@@ -283,13 +330,13 @@ function Snake() {
             // 根据蛇的长度，设置定时器频率SnakeTime
             // set the timer according to the length of the snake
             if (len < 3) {
-                SnakeTime = 210;
+                SnakeTime = SnakeTimeNormal;
             }
             SnakeTime = SnakeTime + (len - 3) * 5;
             // SnakeTime最长不能大于200
             // SnakeTime can't be more than 200
-            if (SnakeTime > 200) {
-                SnakeTime = 200;
+            if (SnakeTime > SnakeTimeNormal) {
+                SnakeTime = SnakeTimeNormal;
             }
             // 当蛇长度小于3时，游戏结束
             // stop the game when the length of the snake is less than 3
@@ -306,7 +353,7 @@ function Snake() {
                 // 显示开始按钮
                 // display the start button
                 document.getElementById('beginBox').style.display = 'block';
-                if (winnumber != windowNormal) {
+                if (winnumber != winNormal) {
                     document.getElementById('normal').style.display = 'block';
                 }
                 // 清除蛇
@@ -316,11 +363,7 @@ function Snake() {
                         map.removeChild(this.body[i].flag);
                     }
                 }
-                this.body = [   // back to the initial status
-                    { x: 2, y: 0 },
-                    { x: 1, y: 0 },
-                    { x: 0, y: 0 }
-                ];
+                this.body = game.setbody();;
                 this.direction = 'down';
                 this.display();   // 显示初始状态  // display the initial status
                 return false;   // 结束 // end
@@ -370,7 +413,7 @@ function Snake() {
                 // 显示开始按钮
                 // show the begin button
                 document.getElementById('beginBox').style.display = 'block';
-                if (winnumber != windowNormal) {
+                if (winnumber != winNormal) {
                     document.getElementById('normal').style.display = 'block';
                 }
                 // 删除蛇
@@ -380,43 +423,37 @@ function Snake() {
                         map.removeChild(this.body[i].flag);
                     }
                 }
-                this.body = [   // back to the initial status
-                    { x: 2, y: 0 },
-                    { x: 1, y: 0 },
-                    { x: 0, y: 0 }
-                ];
+                this.body = game.setbody();;
                 this.direction = 'down';
                 this.display();   // 显示初始状态 show the initial status
                 return false;   // 结束 end
             }
         }
-
-        if (this.body.length > winnumber) {
-            popMsg('congratulations! You win this level!', thisTrue);
+        // update the goal
+        document.getElementById('getnow').innerHTML = this.body.length - 3;
+        if (this.body.length - 3 >= winnumber) {
+            popMsg('Congratulations! You pass this level!', thisTrue);
             flagBagin = false;
-            document.getElementById('begin').innerHTML = 'Begin again';
+
             document.getElementById('beginBox').style.display = 'block';
 
             document.getElementById('challenge').style.display = 'block';
             document.getElementById('text1').style.display = 'block';
-
+            document.getElementById('normal').style.display = 'none';
             // delete the old snake
             for (var i = 0; i < this.body.length; i++) {
                 if (this.body[i].flag != null) {
                     map.removeChild(this.body[i].flag);
                 }
             }
-            this.body = [   // nack to the initial status
-                { x: 2, y: 0 },
-                { x: 1, y: 0 },
-                { x: 0, y: 0 }
-            ];
+            this.body = game.setbody();;
             this.direction = 'down';
             this.display();   // display the snake
             flagBagin = false;
             clearInterval(timer);
             return;
         }
+
 
         // 先删掉初始的蛇，在显示新蛇
         // delete the initial snake, and display the new snake
@@ -674,7 +711,7 @@ btn.onclick = function () {
     parent.style.display = 'none';
     // 获取定时器时间
     // get timer time
-    SnakeTime = 200;
+    SnakeTime = SnakeTimeNormal;
     let time2 = SnakeTime;
     flagBagin = true;
     startTime = Date.now();
@@ -685,7 +722,8 @@ btn.onclick = function () {
         snake.run();
     }, time2);
 
-
+    // update win number
+    document.getElementById('neednow').innerHTML = winnumber;
 }
 
 
@@ -745,8 +783,6 @@ function showAni(flag) {
 
     if (flag == thisTrue) {
         dom = document.querySelector('.fire')
-        console.log('fire')
-        console.log(flag)
     } else {
         dom = document.querySelector('.bomb')
     }
@@ -755,5 +791,5 @@ function showAni(flag) {
     dom.style.display = 'block'
     setTimeout(() => {
         dom.style.display = 'none'
-    }, 2300)
+    }, 2500)
 }

@@ -2,10 +2,12 @@
 <html>
 
 <head lang="en">
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> snake game </title>
+
   <!-- Centralize scaling -->
   <style>
     body {
@@ -16,6 +18,8 @@
   <!-- add css files -->
   <link rel="stylesheet" href="./css/ppt.css">
   <link rel="stylesheet" href="./css/snake.css">
+  <link type="text/css" href="css/snow.css" rel="stylesheet" />
+
   <script defer src="js/scale.js"></script>
   <!-- Create web avatars -->
   <link rel="icon" href="resources/favicon.png" type="image/png">
@@ -40,24 +44,38 @@
   </div>
   <!-- 背景音乐 -->
   <!-- add background music -->
-  <audio preload loop src="./resources/Volumebgm.mp3" autoplay id="vd">
+  <!-- reference from: https://www.aigei.com/music/class/thriller/ -->
+  <audio preload loop src="./resources/Horror.mp3" autoplay id="vd">
     Your browser does not support the audio element.
   </audio>
-  <audio preload loop src="./resources/Astronomia.mp3" autoplay id="snakebgm">
+  <!-- reference from: http://scan.witness.welcome.wind.watch.can-aqua.com/w/iLBBRuVDOo4/pages -->
+  <audio preload loop src="./resources/Some.mp3" autoplay id="snakebgm">
     Your browser does not support the audio element.
   </audio>
+
+  <audio preload loop src="./resources/winbgm.mp3" autoplay id="winbgm">
+    Your browser does not support the audio element.
+  </audio>
+
   <!-- 游戏画布 -->
   <!-- add canvas -->
   <canvas id="pptCanvas" width="1000" height="600"></canvas>
   <div id="main">
+    <!-- reference from: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fcomics--826903181576820280%2F&psig=AOvVaw0qLFXdhk36OC72UGVs8uVz&ust=1681491767640000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjz2o2rp_4CFQAAAAAdAAAAABAo -->
+
     <!-- 添加两种不同的结束特效 -->
     <!-- add two different end effects -->
     <div class="fire"></div>
     <div class="bomb"></div>
     <div class="firework"></div>
+
+
+
     <!-- 游戏计时器 -->
     <!-- add game timer -->
     <div class="count-down"> Time: <span id='timecount'>100</span>s</div>
+    <div class="Level"> Level: <span id='levelnow'>1</span></div>
+    <div class="Need"> Need: <span id='neednow'></span>/ <span id = 'getnow'></span></div>
     <!-- 游戏开始按钮 -->
     <!-- add game start button -->
     <div id=beginBox>
@@ -71,12 +89,36 @@
         </p>
 
       </div>
-
     </div>
 
     <!-- 蛇的地图 -->
     <!-- add snake map -->
-    <div class="map" id="map"></div>
+
+    <div class="map" id="map">
+
+      <!-- 为地图增加动态效果 -->
+      <!-- add dynamic effect to map -->
+      <div class="moving">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+      </div>
+
+
+      <div id="winGifs" style="display: flex; justify-content: space-between; ">
+        <div id="winGifL" style="margin-top: 200px;">
+          <img src="resources\win1.gif" alt="Smiley face" style="float:left" width="300" height="300">
+        </div>
+        <div id="winGifR" style="margin-top: 50px;">
+          <img src="resources\win2.gif" alt="Smiley face" style="float:right" width="300" height="300">
+        </div>
+      </div>
+      
+
+
+    </div>
+
+
     <!-- 游戏说明 -->
     <!-- add game instructions -->
     <div class="desc">
@@ -86,12 +128,14 @@
       <span class="item drugs">Drugs</span>
     </div>
   </div>
+
   <!-- 蛇游戏逻辑 -->
   <!-- add snake game logic -->
   <script src="./js/snake.js"></script>
   <!-- 游戏开始界面逻辑 -->
   <!-- add game start page logic -->
   <script src="js/ppt.js"></script>
+
 </body>
 
 </html>
