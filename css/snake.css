@@ -43,6 +43,43 @@ body {
     z-index: 12;
 }
 
+/* 等级容器 */
+/* level container */
+.Level {
+    position: absolute;
+    /* 绝对定位 absolute positioning */
+    top: 20px;
+    /* 上边距 top margin */
+    left: 45%;
+    /* 左边距 left margin */
+    font-weight: bold;
+    /* 文字加粗 bold text */
+    font-size: 24px;
+    /* 文字大小 text size */
+    color: #fff;
+    /* 文字颜色 text color */
+    z-index: 12;
+}
+
+/* 要求容器 */
+/* requirement container */
+.Need {
+    position: absolute;
+    /* 绝对定位 absolute positioning */
+    top: 20px;
+    /* 上边距 top margin */
+    right: 20px;
+    /* 左边距 left margin */
+    font-weight: bold;
+    /* 文字加粗 bold text */
+    font-size: 24px;
+    /* 文字大小 text size */
+    color: #fff;
+    /* 文字颜色 text color */
+    z-index: 12;
+}
+
+
 /* 物品描述 */
 /* item description */
 .desc {
@@ -103,6 +140,22 @@ body {
     /* 背景颜色 background color */
     margin: 0 auto;
     /* 水平居中 */
+    z-index: 5;
+    overflow: hidden;
+}
+
+.moving {
+    position: absolute;
+    /* 绝对定位 absolute positioning */
+    top: 0;
+    /* 上边距 top margin */
+    left: 0;
+    /* 左边距 left margin */
+    width: 1200px;
+    /* 宽度 width */
+    height: 580px;
+    /* 高度 height */
+    z-index: 2;
 }
 
 /* 开始游戏的盒子 */
