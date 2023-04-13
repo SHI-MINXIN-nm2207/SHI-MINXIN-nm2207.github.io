@@ -1,15 +1,79 @@
 // reference: https://segmentfault.com/a/1190000041933671
 
+// Fixed constants
+
+// set the normal win number
+const windowNormal = 5;
+const countDownTimeNormal = 101000;
+const SnakeTimeNormal = 200;
+const thisFalse = 2;
+const thisTrue = 1;
+const thisWin = 3;
+
+
 // the velocity of the snake
-var SnakeTime = 200;
+var SnakeTime = SnakeTimeNormal;
 // map
 var map = document.getElementById('map');
 
 var startTime = Date.now();
-const countDownTime = 100000; // count down 100s
+var countDownTime = countDownTimeNormal; // count down 100s
 // make 2 flag too control the time 
 flagBagin = false;
 timeoutflag = false;
+
+
+// set the normal win number
+var winnumber = windowNormal;
+
+// set all image to be invisible
+document.getElementById('challenge').style.display = 'none';
+document.getElementById('text1').style.display = 'none';
+document.getElementById('normal').style.display = 'none';
+
+// make the harder game mode
+document.getElementById('challenge').onclick = function () {
+    // add the Conditions of victory
+    winnumber = winnumber + 5;
+    // make the limit of max win number to be 25
+    if (winnumber > 25) {
+        winnumber = 25;
+    }
+    // make the time limit shorter
+    countDownTime = countDownTime - 20000;
+    // limit the time limit to be 25s
+    if (countDownTime <= 20000) {
+        countDownTime = 20000;
+        // make the snake move faster
+        SnakeTime = SnakeTime - 10;
+    }
+
+    // if the snamke move too fast, make it win
+    if (SnakeTime < 40) {
+        // 彻底胜利
+        popMsg('Congratulations! You have broken through the layers of the puzzle! \n You have successfully escaped!', thisWin);
+        // after win, make the button invisible
+        document.getElementById('challenge').style.display = 'none';
+        document.getElementById('text1').style.display = 'none';
+        document.getElementById('normal').style.display = 'none';
+        document.getElementById('beginBox').style.display = 'none';
+
+    }
+    // after click the button, make the button invisible
+    document.getElementById('challenge').style.display = 'none';
+    document.getElementById('text1').style.display = 'none';
+}
+
+// make the normal game mode
+document.getElementById('normal').onclick = function () {
+    // set the number as begin
+    winnumber = windowNormal;
+    countDownTime = countDownTimeNormal;
+    SnakeTime = SnakeTimeNormal;
+    // after click the button, make the button invisible
+    document.getElementById('normal').style.display = 'none';
+}
+
 
 // update the count down time
 function updateTime() {
@@ -17,7 +81,7 @@ function updateTime() {
     const timeElement = document.getElementById('timecount');
     // when game not begin, the time never change
     if (flagBagin === false) {
-        timeElement.textContent = 100;
+        timeElement.textContent = '--';
         return;
     }
     // when game begin, the time will count down
@@ -97,7 +161,6 @@ function Snake() {
     // let the snake run, the position of the next element is the position of the previous element
     // the head of the snake will change according to the direction, so i can't be 0
     this.run = function () {
-        console.log(' runtime' + SnakeTime);
         // 后一个元素到前一个元素的位置
         // the position of the next element is the position of the previous element
         if (flagBagin === false) {
@@ -147,7 +210,7 @@ function Snake() {
 
         // 判断是否出界,根据蛇头判断
         // judge whether the snake is out of the map, according to the head of the snake
-        if (this.body[0].x < 0 || this.body[0].x > 120 || this.body[0].y < 0 || this.body[0].y > 60) {
+        if (this.body[0].x < 0 || this.body[0].x > 120 || this.body[0].y < 0 || this.body[0].y >= 58) {
             // 清除定时器
             // clear the timer
             clearInterval(timer);
@@ -157,6 +220,9 @@ function Snake() {
             // 显示重新开始按钮
             // display the button of restart
             document.getElementById('beginBox').style.display = 'block';
+            if (winnumber != windowNormal) {
+                document.getElementById('normal').style.display = 'block';
+            }
             // 删除旧的蛇
             // delete the old snake
             for (var i = 0; i < this.body.length; i++) {
@@ -207,8 +273,7 @@ function Snake() {
         if (this.body[0].x == wrongfood.x && this.body[0].y == wrongfood.y) {
             // 蛇减一节，因为根据最后节点定，下面display时，会自动赋值的
             // delete a new element to the snake, because the last element will be the new element
-            //console.log('毒药: ' +this.body[0].x, wrongfood.x, this.body[0].y, wrongfood.y);
-            console.log('bad runtime' + SnakeTime);
+
             var add = this.body.pop();
             map.removeChild(add.flag);
 
@@ -241,6 +306,9 @@ function Snake() {
                 // 显示开始按钮
                 // display the start button
                 document.getElementById('beginBox').style.display = 'block';
+                if (winnumber != windowNormal) {
+                    document.getElementById('normal').style.display = 'block';
+                }
                 // 清除蛇
                 // clear the snake
                 for (var i = 0; i < this.body.length; i++) {
@@ -302,6 +370,9 @@ function Snake() {
                 // 显示开始按钮
                 // show the begin button
                 document.getElementById('beginBox').style.display = 'block';
+                if (winnumber != windowNormal) {
+                    document.getElementById('normal').style.display = 'block';
+                }
                 // 删除蛇
                 // delete the snake
                 for (var i = 0; i < this.body.length; i++) {
@@ -319,9 +390,32 @@ function Snake() {
                 return false;   // 结束 end
             }
         }
-        if (this.body.length > 15) {
-            popMsg('congratulations! You win!', true)
+
+        if (this.body.length > winnumber) {
+            popMsg('congratulations! You win this level!', thisTrue);
             flagBagin = false;
+            document.getElementById('begin').innerHTML = 'Begin again';
+            document.getElementById('beginBox').style.display = 'block';
+
+            document.getElementById('challenge').style.display = 'block';
+            document.getElementById('text1').style.display = 'block';
+
+            // delete the old snake
+            for (var i = 0; i < this.body.length; i++) {
+                if (this.body[i].flag != null) {
+                    map.removeChild(this.body[i].flag);
+                }
+            }
+            this.body = [   // nack to the initial status
+                { x: 2, y: 0 },
+                { x: 1, y: 0 },
+                { x: 0, y: 0 }
+            ];
+            this.direction = 'down';
+            this.display();   // display the snake
+            flagBagin = false;
+            clearInterval(timer);
+            return;
         }
 
         // 先删掉初始的蛇，在显示新蛇
@@ -463,7 +557,7 @@ function correctfood() {
         f.style.width = this.width + 'px';
         f.style.height = this.height + 'px';
         // set the background color of the drug food
-        f.style.background = 'blue';
+        f.style.background = 'rgb(227, 217, 107)';
         f.style.position = 'absolute';
         // 生成随机的坐标
         // generate random coordinates
@@ -559,6 +653,7 @@ wrongfood.display();
 var correctfood = new correctfood();
 correctfood.display();
 
+var fristbgm = 1;
 
 // 获取开始按钮
 // get begin button
@@ -568,6 +663,11 @@ var btn = document.getElementById('begin');
 btn.onclick = function () {
     // 开始按钮毛玻璃幕布
     // begin button curtain
+    if (fristbgm == 1) {
+        document.getElementById('vd').pause();
+        document.getElementById('snakebgm').play();
+        fristbgm = 0;
+    }
     var parent = this.parentNode;
     // 隐藏开始按钮
     // hide begin button
@@ -611,21 +711,42 @@ function popMsg(msg, flag) {
     // set fade out effect
     dom.className = 'message'
     document.body.appendChild(dom)
-    setTimeout(() => {
-        dom.classList.add('zoomOut')
-        document.body.removeChild(dom)
-    }, 2000)
+    // make the final win is different from the other times
+    if (flag != thisWin) {
+        setTimeout(() => {
+            dom.classList.add('zoomOut')
+            document.body.removeChild(dom)
+        }, 4000)
+
+    } else {
+        // make tje time very long to show the final win
+        setTimeout(() => {
+            dom.classList.add('zoomOut')
+            document.body.removeChild(dom)
+        }, 500000)
+    }
+    // make the flag be false
+    console.log(flag)
     showAni(flag)
+    if (flag != thisWin) { flag = thisFalse }
 }
 
 // 显示烟花/炸弹
 // show fireworks/bomb
-function showAni(flag = false) {
+function showAni(flag) {
     let dom
     // 根据是否获胜显示不同动画
     // show different animation according to whether win
-    if (flag) {
+    if (flag == thisWin) {
+        dom = document.querySelector('.firework')
+        dom.style.display = 'block'
+        return;
+    }
+
+    if (flag == thisTrue) {
         dom = document.querySelector('.fire')
+        console.log('fire')
+        console.log(flag)
     } else {
         dom = document.querySelector('.bomb')
     }
@@ -634,5 +755,5 @@ function showAni(flag = false) {
     dom.style.display = 'block'
     setTimeout(() => {
         dom.style.display = 'none'
-    }, 2000)
+    }, 2300)
 }

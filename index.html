@@ -6,10 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> snake game </title>
+  <!-- Centralize scaling -->
+  <style>
+    body {
+      transform-origin: center center;
+    }
+  </style>
   <!-- 引入css文件 -->
   <!-- add css files -->
   <link rel="stylesheet" href="./css/ppt.css">
   <link rel="stylesheet" href="./css/snake.css">
+  <script defer src="js/scale.js"></script>
+  <!-- Create web avatars -->
+  <link rel="icon" href="resources/favicon.png" type="image/png">
 </head>
 
 <body>
@@ -34,6 +43,9 @@
   <audio preload loop src="./resources/Volumebgm.mp3" autoplay id="vd">
     Your browser does not support the audio element.
   </audio>
+  <audio preload loop src="./resources/Astronomia.mp3" autoplay id="snakebgm">
+    Your browser does not support the audio element.
+  </audio>
   <!-- 游戏画布 -->
   <!-- add canvas -->
   <canvas id="pptCanvas" width="1000" height="600"></canvas>
@@ -42,6 +54,7 @@
     <!-- add two different end effects -->
     <div class="fire"></div>
     <div class="bomb"></div>
+    <div class="firework"></div>
     <!-- 游戏计时器 -->
     <!-- add game timer -->
     <div class="count-down"> Time: <span id='timecount'>100</span>s</div>
@@ -49,7 +62,18 @@
     <!-- add game start button -->
     <div id=beginBox>
       <div class="btn" id="begin">Begin </div>
+      <div class="btn" id="challenge">Next Level</div>
+      <div class="btn" id="normal"> Initial Level </div>
+      <div id="text1">
+        <p>
+          Challenge Mode has a higher win requirement and fewer countdowns Time. <br>
+          Maybe have higher speed of snake.(When count-down time is very short)
+        </p>
+
+      </div>
+
     </div>
+
     <!-- 蛇的地图 -->
     <!-- add snake map -->
     <div class="map" id="map"></div>
