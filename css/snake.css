@@ -348,7 +348,7 @@ body {
     display: none;
     position: fixed;
     top: 20vh;
-    left: 50vw;
+    left: 60%;
     width: 200px;
     height: 200px;
     z-index: 9999;

@@ -31,7 +31,8 @@ function bodyScale2() {
         
 }
 
-
+// 初始化屏幕并且禁用音频
+// initialize the screen and disable the audio
 window.onload = window.onresize = function () {
     bodyScale1();
     document.getElementById('vd').puase()

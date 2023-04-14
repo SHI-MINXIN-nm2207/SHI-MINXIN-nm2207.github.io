@@ -10,6 +10,7 @@ const SnakeTimeMax = 200;
 const thisFalse = 2;
 const thisTrue = 1;
 const thisWin = 3;
+const waitTime = 3000;
 
 
 // the velocity of the snake
@@ -126,10 +127,15 @@ function updateTime() {
         popMsg('Timeout! You died!')
 
         timeoutflag = true;
-        document.getElementById('beginBox').style.display = 'block';
-        if (winnumber != winNormal) {
-            document.getElementById('normal').style.display = 'block';
-        }
+
+        setTimeout(function () {
+            document.getElementById('beginBox').style.display = 'block';
+            if (winnumber != winNormal) {
+                document.getElementById('normal').style.display = 'block';
+            }
+        }, waitTime);
+
+
         // 删除旧的蛇
         // delete the old snake
         for (var i = 0; i < this.body.length; i++) {
@@ -245,7 +251,14 @@ function Snake() {
         // when time out, the snake will die
         if (timeoutflag === true) {
             clearInterval(timer);
-            document.getElementById('beginBox').style.display = 'block';
+            setTimeout(function () {
+                document.getElementById('beginBox').style.display = 'block';
+                if (winnumber != winNormal) {
+                    document.getElementById('normal').style.display = 'block';
+                }
+            }, waitTime);
+
+
             // delete the old snake
             for (var i = 0; i < this.body.length; i++) {
                 if (this.body[i].flag != null) {
@@ -270,10 +283,15 @@ function Snake() {
             popMsg('You out of the map! You died')
             // 显示重新开始按钮
             // display the button of restart
-            document.getElementById('beginBox').style.display = 'block';
-            if (winnumber != winNormal) {
-                document.getElementById('normal').style.display = 'block';
-            }
+            setTimeout(function () {
+                document.getElementById('beginBox').style.display = 'block';
+                if (winnumber != winNormal) {
+                    document.getElementById('normal').style.display = 'block';
+                }
+            }, waitTime);
+
+
+
             // 删除旧的蛇
             // delete the old snake
             for (var i = 0; i < this.body.length; i++) {
@@ -352,10 +370,14 @@ function Snake() {
                 flagBagin = false;
                 // 显示开始按钮
                 // display the start button
-                document.getElementById('beginBox').style.display = 'block';
-                if (winnumber != winNormal) {
-                    document.getElementById('normal').style.display = 'block';
-                }
+                setTimeout(function () {
+                    document.getElementById('beginBox').style.display = 'block';
+                    if (winnumber != winNormal) {
+                        document.getElementById('normal').style.display = 'block';
+                    }
+                }, waitTime);
+
+
                 // 清除蛇
                 // clear the snake
                 for (var i = 0; i < this.body.length; i++) {
@@ -412,10 +434,12 @@ function Snake() {
                 flagBagin = false;
                 // 显示开始按钮
                 // show the begin button
-                document.getElementById('beginBox').style.display = 'block';
-                if (winnumber != winNormal) {
-                    document.getElementById('normal').style.display = 'block';
-                }
+                setTimeout(function () {
+                    document.getElementById('beginBox').style.display = 'block';
+                    if (winnumber != winNormal) {
+                        document.getElementById('normal').style.display = 'block';
+                    }
+                }, waitTime);
                 // 删除蛇
                 // delete the snake
                 for (var i = 0; i < this.body.length; i++) {
@@ -434,11 +458,12 @@ function Snake() {
         if (this.body.length - 3 >= winnumber) {
             popMsg('Congratulations! You pass this level!', thisTrue);
             flagBagin = false;
+            setTimeout(function () {
+                document.getElementById('beginBox').style.display = 'block';
+                document.getElementById('challenge').style.display = 'block';
+                document.getElementById('text1').style.display = 'block';
+            }, waitTime);
 
-            document.getElementById('beginBox').style.display = 'block';
-
-            document.getElementById('challenge').style.display = 'block';
-            document.getElementById('text1').style.display = 'block';
             document.getElementById('normal').style.display = 'none';
             // delete the old snake
             for (var i = 0; i < this.body.length; i++) {
